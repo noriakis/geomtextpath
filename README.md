@@ -1,6 +1,33 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# Modified to draw `shadowtext` in `geom_textpath`
+
+``` r
+# Set a consistent theme for the plots here
+theme_set(theme_minimal() + 
+          theme(axis.line = element_line(size = 0.25, colour = "gray75"),
+                panel.background = element_rect(fill = 'grey75')))
+#> Warning: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+#> ℹ Please use the `linewidth` argument instead.
+
+t <- seq(5, -1, length.out = 1000) * pi
+
+spiral <- data.frame(x    = sin(t) * 1:1000, 
+                     y    = cos(t) * 1:1000,
+                     text = paste("Like a circle in a spiral,",
+                                  "like a wheel within a wheel,",
+                                  "never ending or beginning,",
+                                  "on an ever spinning reel")
+                     )
+
+ggplot(spiral, aes(x, y, label = text)) +
+  geom_textpath(size = 7, vjust = 2, text_only = TRUE) +
+  coord_equal(xlim = c(-1500, 1500), ylim = c(-1500, 1500))
+```
+
+<img src="man/figures/README-spiral_shadow-1.png" width="100%" style="display: block; margin: auto;" />
+
 # geomtextpath <img src='man/figures/logo.png' align="right" height="137" />
 
 <!-- badges: start -->
@@ -68,11 +95,6 @@ plotted on an arbitrary path, as shown in the following example:
 # Set a consistent theme for the plots here
 theme_set(theme_minimal() + 
           theme(axis.line = element_line(size = 0.25, colour = "gray75")))
-#> Warning: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
-#> ℹ Please use the `linewidth` argument instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 
 t <- seq(5, -1, length.out = 1000) * pi
 
@@ -238,7 +260,7 @@ such as rivers and roads can be given (curved) text labels:
 ``` r
 
 library(sf)
-#> Linking to GEOS 3.10.2, GDAL 3.4.2, PROJ 8.2.1; sf_use_s2() is TRUE
+#> Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
 
 df <- data.frame(x = c(-4.2518, -3.1883), 
                  y = c(55.8642, 55.9533),
@@ -519,9 +541,6 @@ p <- data.frame(x1 = c(seq(0, 10/6 * pi, pi/3),
   theme(legend.position = "none") 
 #> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
 #> ℹ Please use `linewidth` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 
 p
 ```

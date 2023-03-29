@@ -18,6 +18,29 @@ knitr::opts_chunk$set(
 library(geomtextpath)
 ```
 
+# Modified to draw `shadowtext` in `geom_textpath`
+
+```{r spiral_shadow}
+# Set a consistent theme for the plots here
+theme_set(theme_minimal() + 
+          theme(axis.line = element_line(size = 0.25, colour = "gray75"),
+                panel.background = element_rect(fill = 'grey75')))
+
+t <- seq(5, -1, length.out = 1000) * pi
+
+spiral <- data.frame(x    = sin(t) * 1:1000, 
+                     y    = cos(t) * 1:1000,
+                     text = paste("Like a circle in a spiral,",
+                                  "like a wheel within a wheel,",
+                                  "never ending or beginning,",
+                                  "on an ever spinning reel")
+                     )
+
+ggplot(spiral, aes(x, y, label = text)) +
+  geom_textpath(size = 7, vjust = 2, text_only = TRUE) +
+  coord_equal(xlim = c(-1500, 1500), ylim = c(-1500, 1500))
+```
+
 # geomtextpath <img src='man/figures/logo.png' align="right" height="137" />
 
 <!-- badges: start -->
