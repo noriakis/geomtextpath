@@ -37,7 +37,7 @@ spiral <- data.frame(x    = sin(t) * 1:1000,
                      )
 
 ggplot(spiral, aes(x, y, label = text)) +
-  geom_textpath(size = 7, vjust = 2, text_only = TRUE) +
+  geom_textpath(size = 7, vjust = 2, text_only = TRUE, bg.colour="white") +
   coord_equal(xlim = c(-1500, 1500), ylim = c(-1500, 1500))
 ```
 

@@ -69,7 +69,9 @@ static_text_params <- function(
   padding        = unit(0.05, "inch"),
   text_smoothing = 0,
   rich           = FALSE,
-  remove_long    = FALSE
+  remove_long    = FALSE,
+  bg.colour      = NULL,
+  bg.r           = 0.1
 ) {
 
   if (is.null(gap)) {
@@ -93,6 +95,8 @@ static_text_params <- function(
     text_smoothing = assert(text_smoothing, "numeric"),
     rich           = assert(rich,           "logical"),
     remove_long    = assert(remove_long,    "logical"),
+    bg.colour      = bg.colour,
+    bg.r           = bg.r,
     halign         = halign
   )
 }

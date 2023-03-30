@@ -133,7 +133,9 @@ geom_textpath <- function(
   text_smoothing = 0,
   rich           = FALSE,
   arrow          = NULL,
-  remove_long    = FALSE
+  remove_long    = FALSE,
+  bg.colour      = NULL,
+  bg.r           = 0.1
   ) {
 
   layer(geom        = GeomTextpath,
@@ -160,6 +162,8 @@ geom_textpath <- function(
                         rich           = rich,
                         arrow          = arrow,
                         remove_long    = remove_long,
+                        bg.colour      = bg.colour,
+                        bg.r           = bg.r,
                         ...
                       )
   )
@@ -255,7 +259,6 @@ GeomTextpath <- ggproto("GeomTextpath", Geom,
     } else {
       data$label[first]
     }
-
     textpathGrob(
       label          = safe_labels,
       x              = data$x,
@@ -276,7 +279,9 @@ GeomTextpath <- ggproto("GeomTextpath", Geom,
       padding        = text_params$padding,
       rich           = text_params$rich,
       arrow          = arrow,
-      remove_long    = text_params$remove_long
+      remove_long    = text_params$remove_long,
+      bg.colour      = text_params$bg.colour,
+      bg.r           = text_params$bg.r
     )
   }
 )

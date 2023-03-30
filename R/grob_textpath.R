@@ -94,7 +94,9 @@ textpathGrob <- function(
   default.units  = "npc",
   name           = NULL,
   vp             = NULL,
-  as_label       = FALSE
+  as_label       = FALSE,
+  bg.colour      = NULL,
+  bg.r           = 0.1
 ) {
 
   cl <- if (as_label) "labelpath" else "textpath"
@@ -145,7 +147,10 @@ textpathGrob <- function(
                         vjust         = vjust,
                         halign        = halign,
                         gap           = gap,
-                        remove_long   = remove_long)
+                        remove_long   = remove_long,
+                        bg.colour     = bg.colour,
+                        bg.r          = bg.r
+                        )
     ),
     name = name,
     vp = vp,
@@ -200,6 +205,9 @@ makeContent.textpath <- function(x) {
                 upright = params$upright)
 
     text <- rbind_dfs(text)
+    ## Re-insert params
+    x$params$bg.colour <- params$bg.colour 
+    x$params$bg.r <- params$bg.r
 
     x <- add_path_grob(x, path[!too_long], text,
                         gp_subset(attr(path, "gp"), !too_long),
